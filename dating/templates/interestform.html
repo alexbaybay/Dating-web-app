@@ -30,6 +30,14 @@
               {% endfor %}
               <input type = "submit" value="submit" class="btn btn-success btn-lg btn-block">
             </form>
+
+    
+            <form action="/profile/{{match[0]}}" method="POST">
+              <button class="btn btn-default match-button" name="match_profile" type="submit" value="{{match[0]}}">
+                View Profile
+              </button>
+            </form>
+
           </div> <!-- end panel -->
         </div> <!-- end col -->
       </div> <!-- end row -->

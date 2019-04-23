@@ -43,7 +43,7 @@ class Interest(db.Model):
     __tablename__ = 'interests'
 
     interest_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))   #users table, id
     book_genre_id = db.Column(db.Integer,db.ForeignKey('book_genres.book_genre_id'),nullable=False)
     movie_genre_id = db.Column(db.Integer,db.ForeignKey('movie_genres.movie_genre_id'),nullable=False)
     music_genre_id = db.Column(db.Integer,db.ForeignKey('music_genres.music_genre_id'),nullable=False)
@@ -151,8 +151,7 @@ class MusicGenre(db.Model):
         """displays the ids of music genres and music genres
         Can be cross-referenced with the interests table"""
 
-        return'<music_genre_id={}, music_genre_name={}>'.format(self.music_genre_id,
-                                                            self.music_genre_name)
+        return'<music_genre_id={}, music_genre_name={}>'.format(self.music_genre_id, self.music_genre_name)
 
 
 class FavCuisine(db.Model):
