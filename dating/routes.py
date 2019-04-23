@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from dating import app, db, bcrypt
-from dating.forms import RegistrationForm, LoginForm, EditProfileForm
+from dating.forms import *
 from dating.models import *
 from flask_login import login_user, current_user, logout_user, login_required
 from dating.queries import *
@@ -100,7 +100,36 @@ def logout():
 @login_required
 #Allows a user to view their account profile only if they are logged in
 def account():
-    return render_template('account.html', title='Account')
+
+    selected_interests = []
+
+    user_interests = Interest.query.filter_by(interest_id=current_user.id).first()
+
+    user_book_genre_id = user_interests.book_genre_id
+    user_movie_genre_id = user_interests.movie_genre_id
+    user_music_genre_id = user_interests.music_genre_id
+    user_fav_cuisine_id = user_interests.fav_cuisine_id
+    user_hobby_id = user_interests.hobby_id
+    user_outdoor_id = user_interests.outdoor_id
+    user_religion_id = user_interests.religion_id
+
+    bookname = BookGenre.query.filter_by(book_genre_id=user_book_genre_id).first()
+    moviename = MovieGenre.query.filter_by(movie_genre_id=user_movie_genre_id).first()
+    musicname = MusicGenre.query.filter_by(music_genre_id=user_music_genre_id).first()
+    cuisinename = FavCuisine.query.filter_by(fav_cuisine_id=user_fav_cuisine_id).first()
+    hobbyname = Hobby.query.filter_by(hobby_id=user_hobby_id).first()
+    outdoorname = Outdoor.query.filter_by(outdoor_id=user_outdoor_id).first()
+    religionname = Religion.query.filter_by(religion_id=user_religion_id).first()
+
+    selected_interests.append(bookname.book_genre_name)
+    selected_interests.append(moviename.movie_genre_name)
+    selected_interests.append(musicname.music_genre_name)
+    selected_interests.append(cuisinename.fav_cuisine_name)
+    selected_interests.append(hobbyname.hobby_name)
+    selected_interests.append(outdoorname.outdoor_activity)
+    selected_interests.append(religionname.religion_name)
+
+    return render_template('account.html', title='Account', selected_interests=selected_interests)
 
 @app.route("/profile/<user>", methods=['GET', 'POST'])
 @login_required
@@ -108,7 +137,41 @@ def account():
 def profile(user):
     selected_user=User.query.filter_by(username=user).first()
     user = selected_user.username
-    return render_template('profile.html', selected_user=selected_user, user=user)
+
+    userid=selected_user.id
+
+    selected_interests = []
+
+    user_interests = Interest.query.filter_by(interest_id=userid).first()
+
+    user_book_genre_id = user_interests.book_genre_id
+    user_movie_genre_id = user_interests.movie_genre_id
+    user_music_genre_id = user_interests.music_genre_id
+    user_fav_cuisine_id = user_interests.fav_cuisine_id
+    user_hobby_id = user_interests.hobby_id
+    user_outdoor_id = user_interests.outdoor_id
+    user_religion_id = user_interests.religion_id
+
+    bookname = BookGenre.query.filter_by(book_genre_id=user_book_genre_id).first()
+    moviename = MovieGenre.query.filter_by(movie_genre_id=user_movie_genre_id).first()
+    musicname = MusicGenre.query.filter_by(music_genre_id=user_music_genre_id).first()
+    cuisinename = FavCuisine.query.filter_by(fav_cuisine_id=user_fav_cuisine_id).first()
+    hobbyname = Hobby.query.filter_by(hobby_id=user_hobby_id).first()
+    outdoorname = Outdoor.query.filter_by(outdoor_id=user_outdoor_id).first()
+    religionname = Religion.query.filter_by(religion_id=user_religion_id).first()
+
+    selected_interests.append(bookname.book_genre_name)
+    selected_interests.append(moviename.movie_genre_name)
+    selected_interests.append(musicname.music_genre_name)
+    selected_interests.append(cuisinename.fav_cuisine_name)
+    selected_interests.append(hobbyname.hobby_name)
+    selected_interests.append(outdoorname.outdoor_activity)
+    selected_interests.append(religionname.religion_name)
+
+
+    return render_template('profile.html', selected_user=selected_user, user=user, selected_interests=selected_interests)
+
+#selected_interests=Interest.query.filter_by(interest_id=current_user.id).first()
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -150,7 +213,9 @@ def add_interests():
     outdoor_id = request.form.get('Favorite Outdoor activity')
     religion_id = request.form.get('Religion')
 
-    if request.method == 'POST':
+    exists = db.session.query(db.exists().where(User.id == user_id)).scalar()
+
+    if request.method == 'POST' and exists==False:
           #add user interests for the specific user
         interest = Interest(
             user_id=user_id,
@@ -166,9 +231,35 @@ def add_interests():
         db.session.add(interest)
         db.session.commit()
         return redirect(url_for('account'))
-
+    else:
+        flash("You already have interests, you can update them!")
 
     return render_template('interestform.html', title='Add Interests', all_interests=all_interests)
+
+@app.route('/edit_interests', methods=['GET', 'POST'])
+@login_required
+def edit_interests():
+    form = EditProfileForm()
+    if form.validate_on_submit():
+        if form.profilepic.data:
+            picture_file = save_picture(form.profilepic.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.city = form.city.data
+        current_user.phone = form.phone.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.city.data = current_user.city
+        form.phone.data = current_user.phone
+        flash('Your photo has been uploaded! It is now your profile pic', 'success')
+    image_file = url_for('static', filename='profilepics/' + current_user.image_file)
+    return render_template('edit_interests.html', title='Edit Interests')
+
 
 @app.route('/generate_matches', methods=["GET"])
 @login_required
