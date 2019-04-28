@@ -3,8 +3,8 @@
 <div class="content-section">
   <div class="media">
     <div class="row">
-      <div>
-        <p style="text-align:center;"><img src='/static/profilepics/{{selected_user.image_file}}'align="middle"></p>
+      <div class="container2">
+        <img src="/static/profilepics/{{selected_user.image_file}}">
           <h2 class="account-heading">{{ selected_user.firstname }} {{ selected_user.lastname}}</h2>
           <div class="column">
             <ul>
@@ -19,14 +19,16 @@
           </div>
 
           <div class="column">
-            <p style="font-size: 20px"><b>Interests</b></p>
-            <p><b>BookGenre: </b>{{ selected_interests[0]}}</p>
-            <p><b>MovieGenre: </b>{{ selected_interests[1]}}</p>
-            <p><b>MusicGenre: </b>{{ selected_interests[2]}}</p>
-            <p><b>FavCuisine: </b>{{ selected_interests[3]}}</p>
-            <p><b>Hobby: </b>{{ selected_interests[4]}}</p>
-            <p><b>Outdoor Activity: </b>{{ selected_interests[5]}}</p>
-            <p><b>Religion: </b>{{ selected_interests[6]}}</p>
+            <ul>
+              <p style="font-size: 20px"><b>Interests</b></p>
+              <p><b>BookGenre: </b>{{ selected_interests[0]}}</p>
+              <p><b>MovieGenre: </b>{{ selected_interests[1]}}</p>
+              <p><b>MusicGenre: </b>{{ selected_interests[2]}}</p>
+              <p><b>FavCuisine: </b>{{ selected_interests[3]}}</p>
+              <p><b>Hobby: </b>{{ selected_interests[4]}}</p>
+              <p><b>Outdoor Activity: </b>{{ selected_interests[5]}}</p>
+              <p><b>Religion: </b>{{ selected_interests[6]}}</p>
+            </ul>
           </div>
 
         </div>

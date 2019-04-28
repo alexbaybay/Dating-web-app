@@ -10,17 +10,23 @@ h1, h2, h3, h4, h5, h6 {
 
 .media{
   margin: auto;
-  width: 65%;
+  width: 900px;
   border: 3px;
   padding: 10px;
+  /*border: 3px solid #73AD21;*/
+}
+
+.container2{
+  margin: auto;
+  /*border: 3px solid #E11616;*/
+  width: 850px
 }
 
 img{
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-  height: 80%
+  margin: auto;
+  width: 50%;
+  height: 50%
 }
 
 .bg-steel {
@@ -97,13 +103,16 @@ a.article-title:hover {
 
 /*css code for the columns in profile and acount html*/
 .column {
+  /*border: 3px solid #73AD21;*/
   float: left;
-  margin:auto;
+  margin: 4.5%;
 }
 
-/* Clear floats after the columns */
-.row:after {
+/*Clear Floats after Columns*/
+.row:after{
   content: "";
   display: table;
   clear: both;
+  /*border: 3px solid #73AD21;*/
+  margin: 4.5%;
 }

@@ -2,34 +2,38 @@
 {% block content %}
 <div class="content-section">
   <div class="media">
-    <div>
-      <img src="static/profilepics/{{current_user.image_file }}">
-      <div class="media-body">
-        <h2 class="account-heading">{{ current_user.firstname }} {{ current_user.lastname}}</h2>
-        <!--Divides user information and interests-->
+    <div class="row">
+      <div class="container2">
+        <img src="static/profilepics/{{current_user.image_file }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ current_user.firstname }} {{ current_user.lastname}}</h2>
+          <!--Divides user information and interests-->
+            <div class="column">
+              <ul>
+                <p style="font-size: 20px"><b>User Information</b></p>
+                <p><b>Username: </b>{{ current_user.username }}</p>
+                <p><b>Birth Day:</b> {{ current_user.date_of_birth }}</p>
+                <p><b>Lives in:</b> {{ current_user.city }}</p>
+                <p><b>Contact through:</b></p>
+                <p style="text-indent: 40px">Email: {{ current_user.email }}</p>
+                <p style="text-indent: 40px">Phone: {{ current_user.phone }}</p>
+              </ul>
+          </div>
+
           <div class="column">
             <ul>
-              <p style="font-size: 20px"><b>User Information</b></p>
-              <p><b>Username: </b>{{ current_user.username }}</p>
-              <p><b>Birth Day:</b> {{ current_user.date_of_birth }}</p>
-              <p><b>Lives in:</b> {{ current_user.city }}</p>
-              <p><b>Contact through:</b></p>
-              <p style="text-indent: 40px">Email: {{ current_user.email }}</p>
-              <p style="text-indent: 40px">Phone: {{ current_user.phone }}</p>
+              <p style="font-size: 20px"><b>Interests</b></p>
+              <p><b>BookGenre: </b>{{ selected_interests[0]}}</p>
+              <p><b>MovieGenre: </b>{{ selected_interests[1]}}</p>
+              <p><b>MusicGenre: </b>{{ selected_interests[2]}}</p>
+              <p><b>FavCuisine: </b>{{ selected_interests[3]}}</p>
+              <p><b>Hobby: </b>{{ selected_interests[4]}}</p>
+              <p><b>Outdoor Activity: </b>{{ selected_interests[5]}}</p>
+              <p><b>Religion: </b>{{ selected_interests[6]}}</p>
             </ul>
-        </div>
+          </div>
 
-        <div class="column">
-          <p style="font-size: 20px"><b>Interests</b></p>
-          <p><b>BookGenre: </b>{{ selected_interests[0]}}</p>
-          <p><b>MovieGenre: </b>{{ selected_interests[1]}}</p>
-          <p><b>MusicGenre: </b>{{ selected_interests[2]}}</p>
-          <p><b>FavCuisine: </b>{{ selected_interests[3]}}</p>
-          <p><b>Hobby: </b>{{ selected_interests[4]}}</p>
-          <p><b>Outdoor Activity: </b>{{ selected_interests[5]}}</p>
-          <p><b>Religion: </b>{{ selected_interests[6]}}</p>
-        </div>
-
+          </div>
         </div>
       </div>
     </div>
