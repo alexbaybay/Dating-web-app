@@ -30,6 +30,11 @@ def index():
 @login_required
 def home():
     users_stack = User.query.all()
+
+    exists = db.session.query(db.exists().where(Interest.interest_id == current_user.id)).scalar()
+    print(exists)
+    if exists==False:
+        return redirect(url_for('add_interests'))
     return render_template('home.html', users_stack=users_stack)
 
 @app.route("/about")
