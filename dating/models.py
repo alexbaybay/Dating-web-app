@@ -27,7 +27,7 @@ class User(db.Model, UserMixin):  #This class defines several fields as class va
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
     date_of_birth = db.Column(db.String(100), nullable=False)
-    city = db.Column(db.String(100), nullable=False)
+    zipcode = db.Column(db.String(15), nullable=False)
     phone = db.Column(db.String(100), nullable=False)
     image_file = db.Column(db.String(20), nullable=True, default='default.jpg')
     messages_sent = db.relationship('Message',
@@ -287,8 +287,7 @@ class Outdoor(db.Model):
         """displays the ids of oa, and oa
         Can be cross-referenced with the interests table"""
 
-        return'<outdoor_id={}, outdoor_activity={}>'.format(self.outdoor_id,
-                                                            self.outdoor_activity)
+        return'<outdoor_id={}, outdoor_activity={}>'.format(self.outdoor_id, self.outdoor_activity)
 
 class Message(db.Model):
 

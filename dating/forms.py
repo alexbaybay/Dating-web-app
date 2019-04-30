@@ -12,7 +12,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators = [DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password')])
     date_of_birth = StringField('Date Of Birth (MM/DD/YYYY)', validators=[DataRequired(), Length(min = 2, max = 20)] )
-    city = StringField('City', validators=[DataRequired(), Length(min = 2, max = 300)] )
+    zipcode = StringField('Zipcode', validators=[DataRequired(), Length(min = 2, max = 15)] )
     phone = StringField('Phone (XXX)-(XXX)-(XXXX)', validators=[DataRequired(), Length(min = 10, max = 12)] )
     submit = SubmitField('Sign up')
 
@@ -35,7 +35,7 @@ class LoginForm(FlaskForm):
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min = 2, max = 20)])
     email = StringField('Email', validators = [DataRequired(), Email()])
-    city = StringField('City', validators=[DataRequired(), Length(min = 2, max = 300)] )
+    zipcode = StringField('Zipcode', validators=[DataRequired(), Length(min = 2, max = 300)] )
     phone = StringField('Phone (XXX)-(XXX)-(XXXX)', validators=[DataRequired(), Length(min = 10, max = 12)] )
     profilepic = FileField('Add Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Submit')

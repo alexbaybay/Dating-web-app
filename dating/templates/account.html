@@ -22,6 +22,7 @@
 
           <div class="column">
             <ul>
+<<<<<<< HEAD
               <p style="font-size: 20px"><b>Interests</b></p>
               <p><b>BookGenre: </b>{{ selected_interests[0] }}</p>
               <p><b>MovieGenre: </b>{{ selected_interests[1] }}</p>
@@ -30,6 +31,15 @@
               <p><b>Hobby: </b>{{ selected_interests[4] }}</p>
               <p><b>Outdoor Activity: </b>{{ selected_interests[5] }}</p>
               <p><b>Religion: </b>{{ selected_interests[6] }}</p>
+=======
+              <p style="font-size: 20px"><b>User Information</b></p>
+              <p><b>Username: </b>{{ current_user.username }}</p>
+              <p><b>Birth Day:</b> {{ current_user.date_of_birth }}</p>
+              <p><b>Lives in:</b> {{ current_user.zipcode }}</p>
+              <p><b>Contact through:</b></p>
+              <p style="text-indent: 40px">Email: {{ current_user.email }}</p>
+              <p style="text-indent: 40px">Phone: {{ current_user.phone }}</p>
+>>>>>>> cd19436a448a259059cae3a8092d31ed974a804f
             </ul>
           </div>
 
