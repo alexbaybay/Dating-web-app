@@ -9,14 +9,13 @@
     }
     </style>
     <div class="container">
-        <form action="account" method="POST">
-
-      <div class="row">
-        <div class="col-xs-10 col-xs-offset-1">
-          <div class="panel panel-default" style="padding:20px">
-            <div>
-              <h2>Add Interests<h2>
-            </div>
+        <form action="account" method="POSt">
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-1">
+            <div class="panel panel-default" style="padding:20px">
+              <div>
+                <h2>Add Interests<h2>
+              </div>
               {% for sub_interest in all_interests %}
                 <h4>{{sub_interest[0]}}</h4>
                 <div class="btn-group"  data-toggle="buttons">
@@ -25,15 +24,14 @@
                       <input type="radio" name="{{sub_interest[0]}}" id="{{interest[1]}}" value="{{interest[0]}}" required>
                       <label for="{{interest[1]}}">{{ interest[1] }}</label>
                     </label>
-                  {% endfor %}
-                </div><!-- end button-grp -->
-              {% endfor %}
-              <input type = "submit" value="submit" class="btn btn-success btn-lg btn-block">
-            </form>
-
-          </div> <!-- end panel -->
-        </div> <!-- end col -->
-      </div> <!-- end row -->
+               {% endfor %}
+               </div><!-- end button-grp -->
+            {% endfor %}
+            <input type = "submit" value="submit" class="btn btn-success btn-lg btn-block">
+            </div><!--end panel-->
+          </div><!--end col-->
+        </div><!--end row-->
+      </form>
     </div> <!-- end container -->
     <script>
       // $("#logout").hide();
