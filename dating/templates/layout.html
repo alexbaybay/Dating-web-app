@@ -42,8 +42,18 @@
               <div class="navbar-nav">
                 {% if current_user.is_authenticated %}
                   <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
+                  <a class="nav-item nav-link" href="{{ url_for('messages') }}">Messages
+                    {% set new_messages = current_user.new_messages() %}
+                    <span id="message_count" class="badge"
+                          style="visibility: {% if new_messages %}visible
+                                             {% else %}hidden {% endif %};">
+                        {{ new_messages }}
+                    </span>
+          </a>
                   <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-                {% else %}
+
+
+                  {% else %}
                   <a class="nav-item nav-link" href="/login">Login</a>
                   <a class="nav-item nav-link" href="/register">Register</a>
                 {% endif %}
@@ -54,7 +64,40 @@
       </header>
 
 
-      {% block content %}{% endblock %}
+      {% block content %}
+
+
+
+      {% endblock %}
+
+      {% block scripts %}
+    <script>
+        // ...
+        function set_message_count(n) {
+            $('#message_count').text(n);
+            $('#message_count').css('visibility', n ? 'visible' : 'hidden');
+        }
+    </script>
+
+    <script>
+        {% if current_user.is_authenticated %}
+        $(function() {
+            var since = 0;
+            setInterval(function() {
+                $.ajax('{{ url_for('notifications') }}?since=' + since).done(
+                    function(notifications) {
+                        for (var i = 0; i < notifications.length; i++) {
+                            if (notifications[i].name == 'unread_message_count')
+                                set_message_count(notifications[i].data);
+                            since = notifications[i].timestamp;
+                        }
+                    }
+                );
+            }, 10000);
+        });
+        {% endif %}
+    </script>
+{% endblock %}
 
 
 

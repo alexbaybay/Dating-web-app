@@ -10,3 +10,4 @@ class Config(object):
     #takes the database URL from the DATABASE_URL environment variable, if not defined,
     #configure a database named app.db located in the main directory of the application, which is stored in the basedir variable.
     SQLALCHEMY_TRACK_MODIFICATIONS = False  #not signaling application when there are changes in the database
+    POSTS_PER_PAGE = 25

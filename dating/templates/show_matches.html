@@ -16,6 +16,7 @@
                         <div class="panel-heading">
                           <h1 class="panel-title" style="text-align: center;"> {{ match[0] }} </h1>
                         </div>
+
                         <div class="panel-body">
                           <div class="profile_picture">
                             <img src="static/profilepics/{{match[3][-1]}}" class="img-responsive img-rounded" style="height: 325px;">
@@ -23,6 +24,7 @@
                           <div style="text-align:center">
                           <h4> percent match = {{ match[1]}} </h4>
                         </div>
+
                         <div class="col-xs-6">
                           <form action="/profile/{{match[0]}}" method="POST">
                             <button class="btn btn-default match-button" name="match_profile" type="submit" value="{{match[0]}}">
@@ -46,6 +48,15 @@
                             </button>
                           </form>
                         </div>
+
+                        <div class="col-xs-6">
+                          <form action="/send_message/{{match[0]}}" method="POST">
+                            <button class="btn btn-default match-button" name="send_message" type="submit" value="{{ match[0] }}" style="text-align: center">
+                              Send A Quick Message
+                            </button>
+                          </form>
+                        </div>
+
                         </div>
                       </div>
                     </div>
